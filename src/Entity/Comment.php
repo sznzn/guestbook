@@ -5,6 +5,9 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+// use Doctrine\ORM\EntityManagerInterface;
+// use Doctrine\ORM\EntityManager;
+
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
@@ -27,7 +30,7 @@ class Comment
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?Conference $conference = null;
 
     #[ORM\Column(length: 255)]
@@ -109,4 +112,12 @@ class Comment
 
         return $this;
     }
+    // public function createComment(EntityManagerInterface $em):Response
+    // {
+
+    //     $em ->persist($conference);
+    //     $em ->flush();
+    //     $comment = new Comment();
+    //     $comment->setConference($conference);
+    // }
 }
